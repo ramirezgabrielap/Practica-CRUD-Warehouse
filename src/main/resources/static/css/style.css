@@ -1,0 +1,12 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+}
+
+.brand {
+  width: 200px;
+  border-radius: 10rem;
+}
