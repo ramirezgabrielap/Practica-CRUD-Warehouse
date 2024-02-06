@@ -20,8 +20,8 @@ public class ThingController {
     @Autowired 
     private final ThingRepository thingRepository;
     
-    public ThingController(ThingRepository planetRepository) {
-        this.thingRepository = planetRepository;
+    public ThingController(ThingRepository thingRepository) {
+        this.thingRepository = thingRepository;
     }
 
     @GetMapping("/list")

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" class="h-100">
+<html   xmlns:th="http://www.thymeleaf.org" 
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        class="h-100">
+    
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,17 +21,43 @@
               crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/742fac59fd.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" th:href="@{/css/style.css}">
+        <!--link rel="stylesheet" href="../static/css/style.css"-->
     </head>
 
 
 
     <body class="d-flex flex-column h-100">
 
+        <nav class="navbar navbar-expand pt-0 pe-4 pb-0">
+            <div class="container-fluid">
+                <div class="navbar-nav ms-auto">
+
+                <button class="btn btn-sm navbar-toggler" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#navbarDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hola, <span sec:authentication="name"></span>
+                            </a>
+                            <ul class="dropdown-menu" style="--bs-dropdown-min-width: 6rem !important;">
+                                <li><a class="dropdown-item" th:href="@{/logout}">Salir</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </nav>
+
         <div class="container">
 
             <div class="row text-center justify-content-center mb-4 mt-4" >
                 <div class="col-12 mb-2">
                     <img th:src="@{/img/logcircular.jpg}" class="img-fluid brand mb-4"/>
+                    <!--img src="../static/img/logcircular.jpg" class="img-fluid brand mb-4"/-->
                     <h1 class="display-4">Mi Bodega</h1>
                 </div>
                 <div class="col-6">
@@ -77,14 +106,14 @@
 
                     <div class="col text-center mt-2">
                         <a type="button" class="btn btn-sm btn-outline-success" th:href="@{/thing/create}"> 
-                            <i class="fa-solid fa-circle-plus">Nuevo</i>
+                            <i class="fa-solid fa-circle-plus"> Nuevo</i>
                         </a>
                     </div>
 
                 </div>
             </div>
 
-            
+
         </div><!--container-->
 
         <footer class="footer mt-auto py-1">
@@ -96,7 +125,7 @@
                    target="_blank"><i class="fa-brands fa-linkedin"></i></a>
             </div>
         </footer>
-        
+
 
         <!-- Modal Delete-->
         <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -133,10 +162,10 @@
         <script>
             const myModalEl = document.getElementById('modalDelete');
             myModalEl.addEventListener('show.bs.modal', event => {
-              let id = event.relatedTarget.dataset.id;
-              let name = event.relatedTarget.dataset.name;
-              document.getElementById('modalName').textContent = name;
-              document.getElementById('formDelete').action = "/thing/"+id;
+                let id = event.relatedTarget.dataset.id;
+                let name = event.relatedTarget.dataset.name;
+                document.getElementById('modalName').textContent = name;
+                document.getElementById('formDelete').action = "/thing/" + id;
             });
         </script>
 
