@@ -41,31 +41,4 @@ public class AuthController {
         return "redirect:/login";
     }
     
-    
-    @GetMapping("/register")
-    public String register() {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
-        User user = new User();
-        user.setUsername("userA");
-        user.setPassword("test1234");
-        user.setName("TheUser");
-        user.setLastname("UserApp");
-        userRepository.save(user);
-              
-        
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        User userB = new User();
-        userB.setUsername("userB");
-        userB.setPassword("test123");
-        userB.setName("TheUserB");
-        userB.setLastname("UserBApp");
-        String encodedPassword = passwordEncoder.encode(userB.getPassword());
-        userB.setPassword(encodedPassword);
-
-        userRepository.save(userB);
-                              
-        return "redirect:/login";
-    }
-    
 }
