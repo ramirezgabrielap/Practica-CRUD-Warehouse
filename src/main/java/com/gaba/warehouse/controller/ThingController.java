@@ -3,6 +3,12 @@ package com.gaba.warehouse.controller;
 import com.gaba.warehouse.model.Thing;
 import com.gaba.warehouse.repository.ThingRepository;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,11 +31,20 @@ public class ThingController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Thing> things = thingRepository.findAll();
-        model.addAttribute("things", things);
+    public String list(@RequestParam(defaultValue = "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<Thing> thingsPage = thingRepository.findAll(pageable);
+        model.addAttribute("thingsPage", thingsPage);
+        model.addAttribute("currentPage", page);
         return "list";
     }
+ 
+    //@GetMapping("/list")
+    //public String list(Model model) {
+    //    List<Thing> things = thingRepository.findAll();
+    //    model.addAttribute("things", things);
+    //    return "list";
+    //}
     
     @GetMapping("/create")
     public String create(Model model) {

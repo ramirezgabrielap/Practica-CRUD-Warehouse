@@ -32,7 +32,6 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        System.out.println("LOGINN!!!!!");
         return "login";
     }
     
